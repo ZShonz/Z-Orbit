@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Z-Orbit</AssemblyName>
+    <Product>Z-Orbit</Product>
+    <Title>Z-Orbit</Title>
+    <Description>Z-Orbit 应用启动助手</Description>
+    <Company>ZShonz</Company>
+    <Authors>ZShonz</Authors>
+    <RootNamespace>CharacterLauncher</RootNamespace>
+    <Version>1.2.0</Version>
+    <ApplicationIcon>assets\app-icon.ico</ApplicationIcon>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="assets\app-icon.ico" />
+    <Resource Include="assets\app-icon-rounded20.png" />
+    <Compile Remove="verification\**\*.cs" />
+    <Page Remove="verification\**\*.xaml" />
+    <None Update="apps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </None>
+    <Content Include="assets\avatars\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+
+  </ItemGroup>
+</Project>

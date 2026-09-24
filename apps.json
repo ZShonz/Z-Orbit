@@ -1,0 +1,11 @@
+{
+  "theme": "terracotta",
+  "cleanMode": false,
+  "hotkey": "Alt+Space",
+  "startWithWindows": true,
+  "apps": [
+    { "name": "Grok", "avatar": "assets/avatars/15-Grok.png", "target": "https://grok.com/", "arguments": "", "accent": "#38BDF8" },
+    { "name": "Claude", "avatar": "assets/avatars/04-Claude.png", "target": "https://claude.ai/", "arguments": "", "accent": "#D97757" },
+    { "name": "GPT", "avatar": "assets/avatars/09-GPT.png", "target": "https://chatgpt.com/", "arguments": "", "accent": "#10A37F" }
+  ]
+}

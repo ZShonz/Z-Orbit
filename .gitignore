@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+.dotnet/
+.dotnet-home/
+.tools/
+publish/
+*.user
+*.suo
+*.lnk
+*.exe
+*.pdb
+verification/artifacts/
+verification/build/
+installer/output/
+design-preview-notes.md
+dotnet-install.ps1
