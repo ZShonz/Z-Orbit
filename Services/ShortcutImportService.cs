@@ -10,10 +10,10 @@ public static class ShortcutImportService
 {
     public static BitmapSource ReadIcon(string path)
     {
-        if (!File.Exists(path)) throw new FileNotFoundException("找不到拖入的文件。", path);
+        if (!File.Exists(path)) throw new FileNotFoundException(LocalizationService.T("找不到拖入的文件。"), path);
         var info = new ShellFileInfo();
         if (SHGetFileInfo(path, 0, ref info, (uint)Marshal.SizeOf<ShellFileInfo>(), 0x100) == IntPtr.Zero || info.Icon == IntPtr.Zero)
-            throw new IOException("无法读取原图标，请手动选择图片。");
+            throw new IOException(LocalizationService.T("无法读取原图标，请手动选择图片。"));
         try
         {
             var image = Imaging.CreateBitmapSourceFromHIcon(info.Icon, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());

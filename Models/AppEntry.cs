@@ -11,6 +11,7 @@ public sealed class AppEntry
 
 public sealed class LauncherConfig
 {
+    public string Language { get; set; } = "zh-CN";
     public string Theme { get; set; } = "terracotta";
     public bool CleanMode { get; set; } = false;
     public string Hotkey { get; set; } = "Alt+Space";

@@ -8,7 +8,7 @@ public static class AvatarService
     public static BitmapImage Load(string path)
     {
         if (new FileInfo(path).Length > 20 * 1024 * 1024)
-            throw new InvalidDataException("请选择小于 20 MB 的图片。");
+            throw new InvalidDataException(LocalizationService.T("请选择小于 20 MB 的图片。"));
         var image = new BitmapImage();
         image.BeginInit();
         image.CacheOption = BitmapCacheOption.OnLoad;

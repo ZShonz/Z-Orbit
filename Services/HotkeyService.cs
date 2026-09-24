@@ -17,11 +17,11 @@ public sealed class HotkeyService : IDisposable
         var parts = text.Split('+', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         uint modifiers = 0;
         foreach (var part in parts.SkipLast(1))
-            modifiers |= part.ToLowerInvariant() switch { "alt" => 1u, "ctrl" or "control" => 2u, "shift" => 4u, "win" or "windows" => 8u, _ => throw new ArgumentException("请使用 Ctrl、Alt、Shift 或 Win 组合键。") };
+            modifiers |= part.ToLowerInvariant() switch { "alt" => 1u, "ctrl" or "control" => 2u, "shift" => 4u, "win" or "windows" => 8u, _ => throw new ArgumentException(LocalizationService.T("请使用 Ctrl、Alt、Shift 或 Win 组合键。")) };
         if (parts.Length < 2 || modifiers == 0 || !Enum.TryParse<Key>(parts[^1], true, out var key)
             || key is Key.None or Key.System or Key.LeftAlt or Key.RightAlt or Key.LeftCtrl or Key.RightCtrl or Key.LeftShift or Key.RightShift or Key.LWin or Key.RWin
             || KeyInterop.VirtualKeyFromKey(key) == 0)
-            throw new ArgumentException("请输入组合键，例如 Alt+Space 或 Ctrl+Alt+L。");
+            throw new ArgumentException(LocalizationService.T("请输入组合键，例如 Alt+Space 或 Ctrl+Alt+L。"));
         var labels = new List<string>();
         if ((modifiers & 2) != 0) labels.Add("Ctrl");
         if ((modifiers & 1) != 0) labels.Add("Alt");

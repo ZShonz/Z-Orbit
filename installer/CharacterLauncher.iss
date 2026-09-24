@@ -1,4 +1,4 @@
-#define AppVersion "1.2.0"
+#define AppVersion "1.3.0"
 #ifndef PackageDirectory
   #define PackageDirectory "..\publish\Z-Orbit"
 #endif

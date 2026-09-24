@@ -91,6 +91,43 @@ internal static class Program
                 && ((SolidColorBrush)shade.Background).Color == Colors.Black && shade.Opacity > 0,
                 "Only unselected portraits receive neutral black shading");
             var originalSidePixels = ReadPortraitPixels(cards[-1]);
+            manager.SettingsChanged += () => typeof(LauncherWindow).GetMethod("ApplyAppearance", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(stage, null);
+            Check(config.Language == "zh-CN" && LocalizationService.Normalize("unknown") == "zh-CN", "Language defaults to Chinese and unknown values fall back safely");
+            Input("NameInput").Text = "Unsaved language-switch edit";
+            var pendingPortrait = Path.Combine(root, "assets", "avatars", "15-Grok.png");
+            PendingImage(pendingPortrait);
+            ((RadioButton)manager.FindName("LanguageEnglish")).IsChecked = true;
+            Check(config.Language == "en-US" && ConfigService.Load().Language == "en-US", "Language switch persists immediately");
+            Check((string)((Button)manager.FindName("AddButton")).Content == "+ Add app"
+                && ((TextBlock)manager.FindName("EditorTitle")).Text == "Edit app"
+                && (string)((Button)manager.FindName("SaveButton")).Content == "Save changes", "English updates static and dynamic manager labels");
+            Check((string)((Button)stage.FindName("ManageAppsButton")).Content == "Manage apps"
+                && ((TextBlock)stage.FindName("UsageHint")).Text.Contains("Right-click"), "English updates main window and hotkey hints live");
+            Check(Input("NameInput").Text == "Unsaved language-switch edit" && ConfigService.Load().Apps[1].Name == "网页入口"
+                && (string?)typeof(AppManagerWindow).GetField("_pendingImage", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(manager) == pendingPortrait,
+                "Language change preserves pending fields and image without saving edits");
+            Check(LocalizationService.F("启动 {0}", "示例 App") == "Launch 示例 App", "Translations preserve user-provided names");
+            bool englishValidation = false;
+            try { TargetService.Validate(""); } catch (ArgumentException ex) { englishValidation = ex.Message.StartsWith("Choose a local target"); }
+            Check(englishValidation, "Validation errors follow selected language");
+            Snapshot(manager, Path.Combine(output, "manager-english.png"));
+            Snapshot(stage, Path.Combine(output, "stage-english.png"));
+            manager.Width = 800; manager.Height = 620;
+            Snapshot(manager, Path.Combine(output, "manager-english-small.png"));
+            manager.Width = 1040; manager.Height = 800;
+            var languageFailure = Path.Combine(data, "language-save-failure");
+            File.WriteAllText(languageFailure, "x");
+            AppContext.SetData("CharacterLauncher.DataDirectory", languageFailure);
+            ((RadioButton)manager.FindName("LanguageChinese")).IsChecked = true;
+            Check(config.Language == "en-US" && LocalizationService.Current == "en-US" && ((RadioButton)manager.FindName("LanguageEnglish")).IsChecked == true,
+                "Failed language save retains active language and selection");
+            AppContext.SetData("CharacterLauncher.DataDirectory", data);
+            var englishReopened = new AppManagerWindow(ConfigService.Load(), 1);
+            Check((string)((Button)englishReopened.FindName("SortButton")).Content == "Reorder", "Reopened manager restores English");
+            englishReopened.Close();
+            ((RadioButton)manager.FindName("LanguageChinese")).IsChecked = true;
+            Check((string)((Button)manager.FindName("AddButton")).Content == "＋ 添加应用" && ConfigService.Load().Language == "zh-CN", "Switching back restores Chinese");
+            PendingImage(savedAvatar);
             Input("NameInput").Text = "尚未保存的名称";
             foreach (var (control, id) in new[] { ("ThemeIce", "ice"), ("ThemeViolet", "violet"), ("ThemeCream", "cream"), ("ThemeTerracotta", "terracotta") })
             {

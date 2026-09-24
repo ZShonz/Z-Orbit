@@ -15,15 +15,15 @@ public static class TargetService
 
     public static string Validate(string value)
     {
-        if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("请选择本地目标，或填写完整的网页地址。");
+        if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException(LocalizationService.T("请选择本地目标，或填写完整的网页地址。"));
         var target = Resolve(value);
         if (Uri.TryCreate(target, UriKind.Absolute, out var uri) && !uri.IsFile)
         {
             if ((uri.Scheme != "http" && uri.Scheme != "https") || string.IsNullOrWhiteSpace(uri.Host))
-                throw new ArgumentException("网页地址须以 https:// 或 http:// 开头。");
+                throw new ArgumentException(LocalizationService.T("网页地址须以 https:// 或 http:// 开头。"));
         }
         else if (!File.Exists(target) && !Directory.Exists(target))
-            throw new FileNotFoundException("找不到这个本地目标，请重新选择文件或文件夹。", target);
+            throw new FileNotFoundException(LocalizationService.T("找不到这个本地目标，请重新选择文件或文件夹。"), target);
         return target;
     }
 

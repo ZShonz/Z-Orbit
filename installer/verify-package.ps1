@@ -17,6 +17,7 @@ $config = Get-Content -LiteralPath (Join-Path $testRoot 'apps.json') -Raw -Encod
 if ($config.apps.Count -ne 3) { throw 'Default application count mismatch.' }
 if (($config.apps.target -join '|') -ne 'https://grok.com/|https://claude.ai/|https://chatgpt.com/') { throw 'Public website defaults mismatch.' }
 if ($config.cleanMode -ne $false) { throw 'First-run help must remain visible.' }
+if ($config.language -ne 'zh-CN') { throw 'First-run language must remain Simplified Chinese.' }
 if (Get-ChildItem -LiteralPath $testRoot -Recurse -Filter '*.lnk') { throw 'Public installer contains local shortcuts.' }
 if (!(Test-Path -LiteralPath (Join-Path $testRoot 'LICENSE'))) { throw 'Missing GPL license.' }
 foreach ($entry in $config.apps) {

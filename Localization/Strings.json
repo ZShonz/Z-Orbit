@@ -1,0 +1,592 @@
+[
+  {
+    "Key": "L001",
+    "Zh": "Z-Orbit · 应用管理",
+    "En": "Z-Orbit · App management"
+  },
+  {
+    "Key": "L002",
+    "Zh": "应用管理",
+    "En": "Manage apps"
+  },
+  {
+    "Key": "L003",
+    "Zh": "管理你的应用与快捷入口",
+    "En": "Manage your apps and shortcuts"
+  },
+  {
+    "Key": "L004",
+    "Zh": "关闭应用管理",
+    "En": "Close app management"
+  },
+  {
+    "Key": "L005",
+    "Zh": "洁净版模式",
+    "En": "Clean mode"
+  },
+  {
+    "Key": "L006",
+    "Zh": "隐藏主界面的标识、关闭按钮和底部提示，保留应用管理入口",
+    "En": "Hide branding and hints; keep the carousel and app management."
+  },
+  {
+    "Key": "L007",
+    "Zh": "外观与配色",
+    "En": "Appearance"
+  },
+  {
+    "Key": "L008",
+    "Zh": "深色陶土",
+    "En": "Terracotta"
+  },
+  {
+    "Key": "L009",
+    "Zh": "深色冰蓝",
+    "En": "Ice blue"
+  },
+  {
+    "Key": "L010",
+    "Zh": "深色紫罗兰",
+    "En": "Violet"
+  },
+  {
+    "Key": "L011",
+    "Zh": "浅色奶油",
+    "En": "Cream"
+  },
+  {
+    "Key": "L012",
+    "Zh": "呼出快捷键",
+    "En": "Global hotkey"
+  },
+  {
+    "Key": "L013",
+    "Zh": "例如 Alt+Space 或 Ctrl+Alt+L",
+    "En": "For example, Alt+Space or Ctrl+Alt+L"
+  },
+  {
+    "Key": "L014",
+    "Zh": "应用快捷键",
+    "En": "Apply hotkey"
+  },
+  {
+    "Key": "L015",
+    "Zh": "使用说明",
+    "En": "How to use"
+  },
+  {
+    "Key": "L016",
+    "Zh": "点击即切换，自动保存。",
+    "En": "Changes apply immediately and save automatically."
+  },
+  {
+    "Key": "L017",
+    "Zh": "开机自动启动",
+    "En": "Launch at sign-in"
+  },
+  {
+    "Key": "L018",
+    "Zh": "更改立即保存，登录后在托盘运行。",
+    "En": "Saves immediately. Runs in the tray at sign-in."
+  },
+  {
+    "Key": "L019",
+    "Zh": "删除选中应用",
+    "En": "Delete selected app"
+  },
+  {
+    "Key": "L020",
+    "Zh": "＋ 添加应用",
+    "En": "+ Add app"
+  },
+  {
+    "Key": "L021",
+    "Zh": "应用排序",
+    "En": "Reorder"
+  },
+  {
+    "Key": "L022",
+    "Zh": "进入排序模式，拖动头像调整顺序",
+    "En": "Enter sorting mode, then drag portraits to reorder."
+  },
+  {
+    "Key": "L023",
+    "Zh": "已有应用",
+    "En": "App list"
+  },
+  {
+    "Key": "L024",
+    "Zh": "拖入一个快捷方式或 EXE，自动添加名称、地址与原图标。\n拖入图片可更换当前头像；确认后点击保存。",
+    "En": "Drop a shortcut or EXE to import its name, path and icon.\nDrop an image to replace the portrait, then save."
+  },
+  {
+    "Key": "L025",
+    "Zh": "编辑应用",
+    "En": "Edit app"
+  },
+  {
+    "Key": "L026",
+    "Zh": "应用头像",
+    "En": "App portrait"
+  },
+  {
+    "Key": "L027",
+    "Zh": "头像预览",
+    "En": "Portrait preview"
+  },
+  {
+    "Key": "L028",
+    "Zh": "更换图片…",
+    "En": "Change image…"
+  },
+  {
+    "Key": "L029",
+    "Zh": "PNG、JPG、BMP 或 ICO，最大 20 MB。\n保存后自动保留图片副本。",
+    "En": "PNG, JPG, BMP or ICO, up to 20 MB.\nA copy is kept when you save."
+  },
+  {
+    "Key": "L030",
+    "Zh": "应用名称",
+    "En": "App name"
+  },
+  {
+    "Key": "L031",
+    "Zh": "目标地址",
+    "En": "Target address"
+  },
+  {
+    "Key": "L032",
+    "Zh": "本地目标或网页地址",
+    "En": "Local path or website URL"
+  },
+  {
+    "Key": "L033",
+    "Zh": "文件…",
+    "En": "File…"
+  },
+  {
+    "Key": "L034",
+    "Zh": "文件夹…",
+    "En": "Folder…"
+  },
+  {
+    "Key": "L035",
+    "Zh": "选择程序、快捷方式或文件",
+    "En": "Choose an app, shortcut or file"
+  },
+  {
+    "Key": "L036",
+    "Zh": "本地程序、快捷方式、文件夹，或 https:// 开头的网址。",
+    "En": "A local app, shortcut, folder, or an https:// website URL."
+  },
+  {
+    "Key": "L037",
+    "Zh": "启动参数（选填）",
+    "En": "Arguments (optional)"
+  },
+  {
+    "Key": "L038",
+    "Zh": "保存后立即更新轮播",
+    "En": "Saving updates the carousel"
+  },
+  {
+    "Key": "L039",
+    "Zh": "测试打开",
+    "En": "Test launch"
+  },
+  {
+    "Key": "L040",
+    "Zh": "关闭",
+    "En": "Close"
+  },
+  {
+    "Key": "L041",
+    "Zh": "保存更改",
+    "En": "Save changes"
+  },
+  {
+    "Key": "L042",
+    "Zh": "隐藏启动器（Esc）",
+    "En": "Hide launcher (Esc)"
+  },
+  {
+    "Key": "L043",
+    "Zh": "隐藏启动器",
+    "En": "Hide launcher"
+  },
+  {
+    "Key": "L044",
+    "Zh": "← → 切换    Enter 打开    Esc 隐藏",
+    "En": "← → Select    Enter Open    Esc Hide"
+  },
+  {
+    "Key": "L045",
+    "Zh": "打开应用管理窗口",
+    "En": "Open app management"
+  },
+  {
+    "Key": "L046",
+    "Zh": "配色已保存，主界面与管理窗口同步更新。",
+    "En": "Theme saved and applied to both windows."
+  },
+  {
+    "Key": "L047",
+    "Zh": "配色保存失败，保留原主题：",
+    "En": "Could not save the theme. Previous theme retained: "
+  },
+  {
+    "Key": "L048",
+    "Zh": "添加应用",
+    "En": "Add app"
+  },
+  {
+    "Key": "L049",
+    "Zh": "添加到轮播",
+    "En": "Add to carousel"
+  },
+  {
+    "Key": "L050",
+    "Zh": "原头像无法读取，可以重新选择图片。",
+    "En": "The original portrait could not be loaded. Choose another image."
+  },
+  {
+    "Key": "L051",
+    "Zh": "已开启：登录后在托盘运行，{0} 呼出。",
+    "En": "Enabled: runs in the tray at sign-in. Press {0} to show."
+  },
+  {
+    "Key": "L052",
+    "Zh": "已关闭开机自动启动。",
+    "En": "Launch at sign-in is disabled."
+  },
+  {
+    "Key": "L053",
+    "Zh": " 恢复启动项也失败：",
+    "En": " Could not restore the startup entry: "
+  },
+  {
+    "Key": "L054",
+    "Zh": "设置失败，配置未更改：",
+    "En": "Could not apply settings. Configuration unchanged: "
+  },
+  {
+    "Key": "L055",
+    "Zh": "当前修改尚未保存，是否放弃这些修改？",
+    "En": "You have unsaved changes. Discard them?"
+  },
+  {
+    "Key": "L056",
+    "Zh": "未保存的修改",
+    "En": "Unsaved changes"
+  },
+  {
+    "Key": "L057",
+    "Zh": "确定从轮播中删除“{0}”吗？\n\n将移除这个条目的图片、名称、目标地址和参数，不会卸载软件或删除原始图片。",
+    "En": "Remove “{0}” from the carousel?\n\nThis removes the entry's portrait, name, target and arguments. It will not uninstall the app or delete the original image."
+  },
+  {
+    "Key": "L058",
+    "Zh": "\n当前条目尚未保存的修改也会放弃。",
+    "En": "\nUnsaved changes to this entry will also be discarded."
+  },
+  {
+    "Key": "L059",
+    "Zh": "删除应用",
+    "En": "Delete app"
+  },
+  {
+    "Key": "L060",
+    "Zh": "已删除，轮播已清空。可以添加新的应用。",
+    "En": "Deleted. The carousel is empty. You can add an app."
+  },
+  {
+    "Key": "L061",
+    "Zh": "已删除，轮播已更新。",
+    "En": "Deleted. The carousel has been updated."
+  },
+  {
+    "Key": "L062",
+    "Zh": "删除失败，条目未移除：",
+    "En": "Could not delete the entry. It has been retained: "
+  },
+  {
+    "Key": "L063",
+    "Zh": "选择应用头像",
+    "En": "Choose an app portrait"
+  },
+  {
+    "Key": "L064",
+    "Zh": "图片文件|*.png;*.jpg;*.jpeg;*.bmp;*.ico",
+    "En": "Images|*.png;*.jpg;*.jpeg;*.bmp;*.ico"
+  },
+  {
+    "Key": "L065",
+    "Zh": "无法读取图片：",
+    "En": "Could not load the image: "
+  },
+  {
+    "Key": "L066",
+    "Zh": "选择要打开的应用或文件",
+    "En": "Choose an app or file to open"
+  },
+  {
+    "Key": "L067",
+    "Zh": "应用和快捷方式|*.exe;*.lnk;*.url|所有文件|*.*",
+    "En": "Apps and shortcuts|*.exe;*.lnk;*.url|All files|*.*"
+  },
+  {
+    "Key": "L068",
+    "Zh": "选择要打开的文件夹",
+    "En": "Choose a folder to open"
+  },
+  {
+    "Key": "L069",
+    "Zh": "已发送打开请求。确认打开正确后，点击保存。",
+    "En": "Launch requested. Check the result, then save."
+  },
+  {
+    "Key": "L070",
+    "Zh": "请填写应用名称。",
+    "En": "Enter an app name."
+  },
+  {
+    "Key": "L071",
+    "Zh": "请先选择一张应用头像。",
+    "En": "Choose a portrait first."
+  },
+  {
+    "Key": "L072",
+    "Zh": "已保存，轮播已更新。",
+    "En": "Saved. The carousel has been updated."
+  },
+  {
+    "Key": "L073",
+    "Zh": "保存失败：",
+    "En": "Could not save: "
+  },
+  {
+    "Key": "L074",
+    "Zh": "洁净版已开启，主界面保留轮播和应用管理入口。",
+    "En": "Clean mode enabled. The carousel and management entry remain visible."
+  },
+  {
+    "Key": "L075",
+    "Zh": "已恢复完整界面和操作提示。",
+    "En": "Full interface and operation hints restored."
+  },
+  {
+    "Key": "L076",
+    "Zh": "请从启动器打开管理窗口后设置快捷键。",
+    "En": "Open app management from the launcher to change the hotkey."
+  },
+  {
+    "Key": "L077",
+    "Zh": "呼出快捷键已保存：",
+    "En": "Global hotkey saved: "
+  },
+  {
+    "Key": "L078",
+    "Zh": "鼠标滚轮：切换选中的图标\n右键点击任意图标：直接打开对应程序\n左键点击图标：选中；再次点击选中图标：打开\n点击空白处：隐藏启动器，返回桌面\n\n方向键：切换图标\nEnter：打开选中的应用\nEsc：隐藏启动器\n呼出 / 隐藏快捷键：",
+    "En": "Mouse wheel: change selection\nRight-click a portrait: open that app\nLeft-click: select; click again to open\nClick a blank area: hide and return to the desktop\n\nArrow keys: change selection\nEnter: open the selected app\nEsc: hide the launcher\nShow / hide hotkey: "
+  },
+  {
+    "Key": "L079",
+    "Zh": "\n可在外观与配色旁输入新组合键并点击“应用快捷键”。\n\n管理窗口：Ctrl+S 保存，Esc 关闭\n拖入快捷方式或 EXE：新建应用并读取原图标\n拖入图片：更换当前编辑条目的图片\n\n洁净版仅隐藏主界面装饰和提示，操作方式不变。",
+    "En": "\nEnter a new key combination and click “Apply hotkey” in app management.\n\nManagement: Ctrl+S to save, Esc to close\nDrop a shortcut or EXE: add an app with its original icon\nDrop an image: replace the current portrait\n\nClean mode hides branding and hints; controls remain the same."
+  },
+  {
+    "Key": "L080",
+    "Zh": "每次请拖入一个快捷方式、EXE 或图片。",
+    "En": "Drop one shortcut, EXE or image at a time."
+  },
+  {
+    "Key": "L081",
+    "Zh": "图片已替换，点击保存后生效。",
+    "En": "Image replaced. Save to apply."
+  },
+  {
+    "Key": "L082",
+    "Zh": "已填入目标地址，确认后点击保存。快捷方式按原有设置启动；已有自定义图片会保留。",
+    "En": "Target filled in. Review and save. Shortcut launch settings and existing custom portraits are preserved."
+  },
+  {
+    "Key": "L083",
+    "Zh": "导入失败：",
+    "En": "Could not import: "
+  },
+  {
+    "Key": "L084",
+    "Zh": "完成排序",
+    "En": "Done"
+  },
+  {
+    "Key": "L085",
+    "Zh": "拖动头像到目标位置，松开自动保存；拖到列表上下边缘可滚动。",
+    "En": "Drag a portrait to reorder; release to save. Hold near the list edge to scroll."
+  },
+  {
+    "Key": "L086",
+    "Zh": "已退出排序模式。",
+    "En": "Sorting mode closed."
+  },
+  {
+    "Key": "L087",
+    "Zh": "顺序保存失败，原顺序未改变：",
+    "En": "Could not save the order. Original order retained: "
+  },
+  {
+    "Key": "L088",
+    "Zh": "顺序已保存。当前名称、地址或图片的修改仍需点击保存。",
+    "En": "Order saved. Save your pending name, target or image changes separately."
+  },
+  {
+    "Key": "L089",
+    "Zh": "顺序已保存，可继续拖动，或点击“完成排序”。",
+    "En": "Order saved. Keep dragging or click “Done”."
+  },
+  {
+    "Key": "L090",
+    "Zh": "Z-Orbit 已经在运行，请按 Alt + Space 或双击托盘图标。",
+    "En": "Z-Orbit is already running. Use your global hotkey or double-click its tray icon."
+  },
+  {
+    "Key": "L091",
+    "Zh": "无法加载启动器。配置文件未被覆盖。\n\n",
+    "En": "Could not load the launcher. Your configuration has not been overwritten.\n\n"
+  },
+  {
+    "Key": "L092",
+    "Zh": "启动器仍可使用，但开机启动设置未生效：\n",
+    "En": "The launcher is available, but the startup setting could not be applied:\n"
+  },
+  {
+    "Key": "L093",
+    "Zh": "开机启动设置",
+    "En": "Startup settings"
+  },
+  {
+    "Key": "L094",
+    "Zh": "Z-Orbit — 快捷键被占用",
+    "En": "Z-Orbit — Hotkey unavailable"
+  },
+  {
+    "Key": "L095",
+    "Zh": "启动器已经打开，但 {0} 被其他程序或 Windows 占用。\n\n你仍可通过托盘图标打开启动器。",
+    "En": "The launcher is open, but {0} is in use by Windows or another app.\n\nYou can still open the launcher from its tray icon."
+  },
+  {
+    "Key": "L096",
+    "Zh": "显示启动器",
+    "En": "Show launcher"
+  },
+  {
+    "Key": "L097",
+    "Zh": "退出",
+    "En": "Exit"
+  },
+  {
+    "Key": "L098",
+    "Zh": "点击右下角“应用管理”添加应用",
+    "En": "Use “Manage apps” below to add an app"
+  },
+  {
+    "Key": "L099",
+    "Zh": "启动 {0}",
+    "En": "Launch {0}"
+  },
+  {
+    "Key": "L100",
+    "Zh": "鼠标滚轮 / ← →：切换    右键图标 / Enter：打开    左键：选中，再次点击打开\n点击空白处 / Esc：隐藏并返回桌面    呼出快捷键：{0}",
+    "En": "Wheel / ← →: select    Right-click / Enter: open    Left-click: select, click again to open\nBlank area / Esc: hide    Show / hide: {0}"
+  },
+  {
+    "Key": "L101",
+    "Zh": "这个快捷键已被占用，请换一个组合；原快捷键仍然有效。",
+    "En": "That hotkey is already in use. Choose another combination; your previous hotkey still works."
+  },
+  {
+    "Key": "L102",
+    "Zh": "应用快捷方式或程序不存在。",
+    "En": "The application or shortcut does not exist."
+  },
+  {
+    "Key": "L103",
+    "Zh": "无法启动 {0}\n\n{1}",
+    "En": "Could not launch {0}\n\n{1}"
+  },
+  {
+    "Key": "L104",
+    "Zh": "应用配置为空，请检查：",
+    "En": "The app configuration is empty. Check: "
+  },
+  {
+    "Key": "L105",
+    "Zh": "应用列表格式不正确，请检查：",
+    "En": "The app list has an invalid format. Check: "
+  },
+  {
+    "Key": "L106",
+    "Zh": "请选择小于 20 MB 的图片。",
+    "En": "Choose an image smaller than 20 MB."
+  },
+  {
+    "Key": "L107",
+    "Zh": "请使用 Ctrl、Alt、Shift 或 Win 组合键。",
+    "En": "Use a key combination with Ctrl, Alt, Shift or Win."
+  },
+  {
+    "Key": "L108",
+    "Zh": "请输入组合键，例如 Alt+Space 或 Ctrl+Alt+L。",
+    "En": "Enter a key combination, such as Alt+Space or Ctrl+Alt+L."
+  },
+  {
+    "Key": "L109",
+    "Zh": "无法确定启动器路径。",
+    "En": "Could not determine the launcher path."
+  },
+  {
+    "Key": "L110",
+    "Zh": "WScript.Shell 不可用。",
+    "En": "WScript.Shell is unavailable."
+  },
+  {
+    "Key": "L111",
+    "Zh": "找不到拖入的文件。",
+    "En": "The dropped file was not found."
+  },
+  {
+    "Key": "L112",
+    "Zh": "无法读取原图标，请手动选择图片。",
+    "En": "Could not read the original icon. Choose an image manually."
+  },
+  {
+    "Key": "L113",
+    "Zh": "请选择本地目标，或填写完整的网页地址。",
+    "En": "Choose a local target or enter a full website URL."
+  },
+  {
+    "Key": "L114",
+    "Zh": "网页地址须以 https:// 或 http:// 开头。",
+    "En": "Website URLs must start with https:// or http://."
+  },
+  {
+    "Key": "L115",
+    "Zh": "找不到这个本地目标，请重新选择文件或文件夹。",
+    "En": "Local target not found. Choose the file or folder again."
+  },
+  {
+    "Key": "L116",
+    "Zh": "语言已保存，界面已切换。",
+    "En": "Language saved and applied."
+  },
+  {
+    "Key": "L117",
+    "Zh": "语言保存失败，保留原语言：",
+    "En": "Could not save the language. Previous language retained: "
+  },
+  {
+    "Key": "L118",
+    "Zh": "界面语言",
+    "En": "Language"
+  }
+]

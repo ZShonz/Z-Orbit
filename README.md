@@ -3,7 +3,7 @@
 **用你喜欢的头像，把常用应用放进一条轨道。**
 A visual application launcher by **ZShonz**.
 
-**目前仅支持 Windows 10 / 11 x64。** macOS、Linux 和原生 ARM64 版本暂未提供。应用界面目前为中文。
+**目前仅支持 Windows 10 / 11 x64。** macOS、Linux 和原生 ARM64 版本暂未提供。支持简体中文和英文界面，默认简体中文。
 
 [**直接下载 Windows 安装包**](https://github.com/ZShonz/Z-Orbit/releases/latest/download/Z-Orbit-Setup.exe) · [查看全部版本](https://github.com/ZShonz/Z-Orbit/releases) · [English](#english)
 
@@ -44,6 +44,7 @@ Z-Orbit 是一个基于头像轮播的 Windows 应用启动助手。按下快捷
 - **拖动排序**：点击“应用排序”，拖动头像到插入线位置，松开自动保存；拖到列表上下边缘会自动滚动。
 - **四种配色**：深色陶土、深色冰蓝、深色紫罗兰、浅色奶油。
 - **洁净版开关**：默认关闭，熟悉操作后可开启。
+- **中英文切换**：在应用管理窗口右上角选择“简体中文”或“English”，即时生效并记住选择。
 - **自定义全局快捷键**：默认 `Alt + Space`；冲突或保存失败时保留原设置。
 - **托盘与开机启动**：可在管理窗口开关；启用后登录 Windows 时在托盘后台运行，不自动弹出轮播。
 - **本地保存**：应用列表、排序、主题和设置保存于本机。
@@ -54,6 +55,8 @@ Z-Orbit 是一个基于头像轮播的 Windows 应用启动助手。按下快捷
 2. 如果已有版本正在运行，先从系统托盘菜单退出 Z-Orbit。
 3. 运行安装程序，完成后启动 Z-Orbit。安装包自带 .NET 运行时，无需另装 .NET。
 4. 点击右下角“应用管理”，添加自己的应用。
+
+需要英文界面时，在“应用管理”右上角点击 **English**。语言切换不会修改应用名称、地址、图片或未保存的编辑内容。Windows 自带文件选择框、系统按钮及系统错误文字仍跟随系统语言。
 
 安装位置默认为 `%LOCALAPPDATA%\Programs\Z-Orbit`。公开版自带的三个网页入口为：
 
@@ -136,7 +139,7 @@ Copyright © 2026 **ZShonz**。源码按 **GNU GPL v3.0** 发布，完整条款�
 
 **Z-Orbit** is a visual Windows application launcher by **ZShonz**. Put your favorite portraits on a carousel and use them to open applications, folders, and websites.
 
-**Windows 10 / 11 x64 only.** No macOS, Linux, or native ARM64 build is currently provided. The application UI is currently in Chinese.
+**Windows 10 / 11 x64 only.** No macOS, Linux, or native ARM64 build is currently provided. The app supports Simplified Chinese and English, with Simplified Chinese as the default.
 
 [**Download the Windows installer directly**](https://github.com/ZShonz/Z-Orbit/releases/latest/download/Z-Orbit-Setup.exe) · [All releases](https://github.com/ZShonz/Z-Orbit/releases)
 
@@ -157,6 +160,7 @@ The screenshots above show the author's customized setup. The public release shi
 - Enter sorting mode and drag entries to reorder them; insertion indicators and edge scrolling help with longer lists. Changes save on drop.
 - Four themes: dark terracotta, ice blue, violet, and light cream.
 - Optional clean mode, off on first use.
+- Instant language switching between Simplified Chinese and English, with your preference saved locally.
 - Configurable global hotkey, `Alt + Space` by default, with conflict handling.
 - System tray operation and configurable launch at Windows sign-in.
 - Local persistence of entries, order, theme, and preferences.
@@ -164,6 +168,8 @@ The screenshots above show the author's customized setup. The public release shi
 ## Install and use
 
 Download the installer from [Releases](https://github.com/ZShonz/Z-Orbit/releases), exit any running Z-Orbit instance through its tray menu, and run the installer. The .NET runtime is included. The default installation directory is `%LOCALAPPDATA%\Programs\Z-Orbit`.
+
+To use English, click **应用管理** at the bottom right of the launcher, then select **English** at the top right of the management window. The change applies immediately and is remembered. App names, addresses, images, and unsaved edits are preserved. Native Windows dialogs, system buttons, and system error messages follow your Windows language. The screenshots above show the Chinese interface.
 
 The public defaults open `https://grok.com/`, `https://claude.ai/`, and `https://chatgpt.com/` in your default browser. Add your own applications through the management window. These third-party services may require their own accounts or subscriptions; Z-Orbit is not affiliated with them.
 

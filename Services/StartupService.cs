@@ -32,9 +32,9 @@ public static class StartupService
     private static void CreateStartupShortcut()
     {
         var executable = Environment.ProcessPath
-                         ?? throw new InvalidOperationException("无法确定启动器路径。");
+                         ?? throw new InvalidOperationException(LocalizationService.T("无法确定启动器路径。"));
         var shellType = Type.GetTypeFromProgID("WScript.Shell")
-                        ?? throw new InvalidOperationException("WScript.Shell 不可用。");
+                        ?? throw new InvalidOperationException(LocalizationService.T("WScript.Shell 不可用。"));
         object? shellObject = null;
         object? shortcutObject = null;
         try

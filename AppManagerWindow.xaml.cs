@@ -20,6 +20,7 @@ public partial class AppManagerWindow : Window
     private string _avatar = "";
     private string? _pendingImage;
     private bool _changingTheme;
+    private bool _changingLanguage;
     private System.Windows.Media.Imaging.BitmapSource? _pendingIcon;
     public event Action? SettingsChanged;
     public Action<string>? ChangeHotkey { get; set; }
@@ -28,9 +29,11 @@ public partial class AppManagerWindow : Window
     public AppManagerWindow(LauncherConfig config, int selectedIndex)
     {
         _config = config;
+        LocalizationService.Apply(config.Language);
         ThemeService.Apply(config.Theme);
         InitializeComponent();
         InitializeSorting();
+        SelectLanguage(config.Language);
         SelectTheme(config.Theme);
         StartupToggle.IsChecked = config.StartWithWindows;
         CleanModeToggle.IsChecked = config.CleanMode;
@@ -40,6 +43,43 @@ public partial class AppManagerWindow : Window
         AppList.ItemsSource = config.Apps;
         AppList.SelectedIndex = config.Apps.Count > 0 ? Math.Clamp(selectedIndex, 0, config.Apps.Count - 1) : -1;
         LoadEditor(AppList.SelectedIndex);
+    }
+
+    private void SelectLanguage(string id)
+    {
+        _changingLanguage = true;
+        LanguageEnglish.IsChecked = LocalizationService.Normalize(id) == "en-US";
+        LanguageChinese.IsChecked = !LanguageEnglish.IsChecked;
+        _changingLanguage = false;
+    }
+
+    private void Language_Checked(object sender, RoutedEventArgs e)
+    {
+        if (_loading || _changingLanguage || sender is not System.Windows.Controls.RadioButton button) return;
+        var id = (string)button.Tag;
+        try
+        {
+            var draft = ConfigService.Clone(_config);
+            draft.Language = id;
+            ConfigService.Save(draft);
+        }
+        catch (Exception ex)
+        {
+            SelectLanguage(_config.Language);
+            ThemeStatus.Text = LocalizationService.T("语言保存失败，保留原语言：") + ex.Message;
+            return;
+        }
+        _config.Language = id;
+        LocalizationService.Apply(id);
+        EditorTitle.Text = LocalizationService.T(_editingIndex < 0 ? "添加应用" : "编辑应用");
+        SaveButton.Content = LocalizationService.T(_editingIndex < 0 ? "添加到轮播" : "保存更改");
+        SortButton.Content = LocalizationService.T(_sorting ? "完成排序" : "应用排序");
+        StartupStatus.Text = _config.StartWithWindows
+            ? LocalizationService.F("已开启：登录后在托盘运行，{0} 呼出。", _config.Hotkey)
+            : LocalizationService.T("已关闭开机自动启动。");
+        ThemeStatus.Text = LocalizationService.T("语言已保存，界面已切换。");
+        StatusText.Text = "";
+        SettingsChanged?.Invoke();
     }
 
     private void SelectTheme(string id)
@@ -62,12 +102,12 @@ public partial class AppManagerWindow : Window
             ConfigService.Save(draft);
             _config.Theme = id;
             ThemeService.Apply(id);
-            ThemeStatus.Text = "配色已保存，主界面与管理窗口同步更新。";
+            ThemeStatus.Text = LocalizationService.T("配色已保存，主界面与管理窗口同步更新。");
         }
         catch (Exception ex)
         {
             SelectTheme(_config.Theme);
-            ThemeStatus.Text = "配色保存失败，保留原主题：" + ex.Message;
+            ThemeStatus.Text = LocalizationService.T("配色保存失败，保留原主题：") + ex.Message;
         }
     }
 
@@ -90,15 +130,15 @@ public partial class AppManagerWindow : Window
         _avatar = app.Avatar;
         _pendingImage = null;
         _pendingIcon = null;
-        EditorTitle.Text = index < 0 ? "添加应用" : "编辑应用";
-        SaveButton.Content = index < 0 ? "添加到轮播" : "保存更改";
+        EditorTitle.Text = index < 0 ? LocalizationService.T("添加应用") : LocalizationService.T("编辑应用");
+        SaveButton.Content = index < 0 ? LocalizationService.T("添加到轮播") : LocalizationService.T("保存更改");
         StatusText.Text = "";
         AvatarPreview.Source = null;
         AvatarPlaceholder.Visibility = Visibility.Visible;
         if (!string.IsNullOrWhiteSpace(_avatar))
         {
             try { ShowImage(_avatar); }
-            catch { ShowStatus("原头像无法读取，可以重新选择图片。", false); }
+            catch { ShowStatus(LocalizationService.T("原头像无法读取，可以重新选择图片。"), false); }
         }
         _dirty = false;
         _loading = false;
@@ -121,15 +161,15 @@ public partial class AppManagerWindow : Window
             StartupService.Apply(enabled);
             ConfigService.Save(draft);
             _config.StartWithWindows = enabled;
-            StartupStatus.Text = enabled ? $"已开启：登录后在托盘运行，{_config.Hotkey} 呼出。" : "已关闭开机自动启动。";
+            StartupStatus.Text = enabled ? LocalizationService.F("已开启：登录后在托盘运行，{0} 呼出。", _config.Hotkey) : LocalizationService.T("已关闭开机自动启动。");
         }
         catch (Exception ex)
         {
             StartupToggle.IsChecked = previous;
             var rollbackError = "";
             try { StartupService.Apply(previous); }
-            catch (Exception rollback) { rollbackError = " 恢复启动项也失败：" + rollback.Message; }
-            StartupStatus.Text = "设置失败，配置未更改：" + ex.Message + rollbackError;
+            catch (Exception rollback) { rollbackError = LocalizationService.T(" 恢复启动项也失败：") + rollback.Message; }
+            StartupStatus.Text = LocalizationService.T("设置失败，配置未更改：") + ex.Message + rollbackError;
         }
     }
 
@@ -140,7 +180,7 @@ public partial class AppManagerWindow : Window
     }
 
     private bool CanDiscard() => !_dirty || System.Windows.MessageBox.Show(this,
-        "当前修改尚未保存，是否放弃这些修改？", "未保存的修改",
+        LocalizationService.T("当前修改尚未保存，是否放弃这些修改？"), LocalizationService.T("未保存的修改"),
         MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes;
 
     private void AppList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -176,9 +216,9 @@ public partial class AppManagerWindow : Window
     {
         if (_editingIndex < 0 || _editingIndex >= _config.Apps.Count) return;
         var name = _config.Apps[_editingIndex].Name;
-        var message = $"确定从轮播中删除“{name}”吗？\n\n将移除这个条目的图片、名称、目标地址和参数，不会卸载软件或删除原始图片。";
-        if (_dirty) message += "\n当前条目尚未保存的修改也会放弃。";
-        if (System.Windows.MessageBox.Show(this, message, "删除应用", MessageBoxButton.YesNo,
+        var message = LocalizationService.F("确定从轮播中删除“{0}”吗？\n\n将移除这个条目的图片、名称、目标地址和参数，不会卸载软件或删除原始图片。", name);
+        if (_dirty) message += LocalizationService.T("\n当前条目尚未保存的修改也会放弃。");
+        if (System.Windows.MessageBox.Show(this, message, LocalizationService.T("删除应用"), MessageBoxButton.YesNo,
             MessageBoxImage.Warning, MessageBoxResult.No) != MessageBoxResult.Yes) return;
         DeleteSelected();
     }
@@ -199,14 +239,14 @@ public partial class AppManagerWindow : Window
             AppList.SelectedIndex = nextIndex;
             LoadEditor(nextIndex);
             Saved?.Invoke(nextIndex);
-            ShowStatus(nextIndex < 0 ? "已删除，轮播已清空。可以添加新的应用。" : "已删除，轮播已更新。", true);
+            ShowStatus(nextIndex < 0 ? LocalizationService.T("已删除，轮播已清空。可以添加新的应用。") : LocalizationService.T("已删除，轮播已更新。"), true);
         }
-        catch (Exception ex) { ShowStatus("删除失败，条目未移除：" + ex.Message, false); }
+        catch (Exception ex) { ShowStatus(LocalizationService.T("删除失败，条目未移除：") + ex.Message, false); }
     }
 
     private void ChooseImage_Click(object sender, RoutedEventArgs e)
     {
-        var picker = new OpenFileDialog { Title = "选择应用头像", Filter = "图片文件|*.png;*.jpg;*.jpeg;*.bmp;*.ico", CheckFileExists = true };
+        var picker = new OpenFileDialog { Title = LocalizationService.T("选择应用头像"), Filter = LocalizationService.T("图片文件|*.png;*.jpg;*.jpeg;*.bmp;*.ico"), CheckFileExists = true };
         if (picker.ShowDialog(this) != true) return;
         try
         {
@@ -216,19 +256,19 @@ public partial class AppManagerWindow : Window
             _dirty = true;
             StatusText.Text = "";
         }
-        catch (Exception ex) { ShowStatus("无法读取图片：" + ex.Message, false); }
+        catch (Exception ex) { ShowStatus(LocalizationService.T("无法读取图片：") + ex.Message, false); }
     }
 
     private void ChooseFile_Click(object sender, RoutedEventArgs e)
     {
-        var picker = new OpenFileDialog { Title = "选择要打开的应用或文件", Filter = "应用和快捷方式|*.exe;*.lnk;*.url|所有文件|*.*", DereferenceLinks = false, CheckFileExists = true };
+        var picker = new OpenFileDialog { Title = LocalizationService.T("选择要打开的应用或文件"), Filter = LocalizationService.T("应用和快捷方式|*.exe;*.lnk;*.url|所有文件|*.*"), DereferenceLinks = false, CheckFileExists = true };
         if (picker.ShowDialog(this) != true) return;
         ImportFile(picker.FileName, false);
     }
 
     private void ChooseFolder_Click(object sender, RoutedEventArgs e)
     {
-        var picker = new OpenFolderDialog { Title = "选择要打开的文件夹" };
+        var picker = new OpenFolderDialog { Title = LocalizationService.T("选择要打开的文件夹") };
         if (picker.ShowDialog(this) != true) return;
         TargetInput.Text = picker.FolderName;
         if (string.IsNullOrWhiteSpace(NameInput.Text)) NameInput.Text = Path.GetFileName(picker.FolderName);
@@ -239,7 +279,7 @@ public partial class AppManagerWindow : Window
         try
         {
             TargetService.Open(TargetInput.Text, ArgumentsInput.Text);
-            ShowStatus("已发送打开请求。确认打开正确后，点击保存。", true);
+            ShowStatus(LocalizationService.T("已发送打开请求。确认打开正确后，点击保存。"), true);
         }
         catch (Exception ex) { ShowStatus(ex.Message, false); TargetInput.Focus(); }
     }
@@ -251,7 +291,7 @@ public partial class AppManagerWindow : Window
         {
             if (string.IsNullOrWhiteSpace(NameInput.Text))
             {
-                ShowStatus("请填写应用名称。", false);
+                ShowStatus(LocalizationService.T("请填写应用名称。"), false);
                 NameInput.Focus();
                 return;
             }
@@ -260,7 +300,7 @@ public partial class AppManagerWindow : Window
             catch (Exception ex) { ShowStatus(ex.Message, false); TargetInput.Focus(); return; }
             if (_editingIndex < 0 && _pendingImage is null && _pendingIcon is null)
             {
-                ShowStatus("请先选择一张应用头像。", false);
+                ShowStatus(LocalizationService.T("请先选择一张应用头像。"), false);
                 return;
             }
             var draft = ConfigService.Clone(_config);
@@ -282,12 +322,12 @@ public partial class AppManagerWindow : Window
             AppList.SelectedIndex = index;
             LoadEditor(index);
             Saved?.Invoke(index);
-            ShowStatus("已保存，轮播已更新。", true);
+            ShowStatus(LocalizationService.T("已保存，轮播已更新。"), true);
         }
         catch (Exception ex)
         {
             if (imported is not null) { try { File.Delete(imported); } catch { } }
-            ShowStatus("保存失败：" + ex.Message, false);
+            ShowStatus(LocalizationService.T("保存失败：") + ex.Message, false);
         }
     }
 
@@ -300,27 +340,27 @@ public partial class AppManagerWindow : Window
             ConfigService.Save(draft);
             _config.CleanMode = draft.CleanMode;
             SettingsChanged?.Invoke();
-            ThemeStatus.Text = draft.CleanMode ? "洁净版已开启，主界面保留轮播和应用管理入口。" : "已恢复完整界面和操作提示。";
+            ThemeStatus.Text = draft.CleanMode ? LocalizationService.T("洁净版已开启，主界面保留轮播和应用管理入口。") : LocalizationService.T("已恢复完整界面和操作提示。");
         }
-        catch (Exception ex) { CleanModeToggle.IsChecked = _config.CleanMode; ThemeStatus.Text = "保存失败：" + ex.Message; }
+        catch (Exception ex) { CleanModeToggle.IsChecked = _config.CleanMode; ThemeStatus.Text = LocalizationService.T("保存失败：") + ex.Message; }
     }
 
     private void ApplyHotkey_Click(object sender, RoutedEventArgs e)
     {
         try
         {
-            if (ChangeHotkey is null) throw new InvalidOperationException("请从启动器打开管理窗口后设置快捷键。");
+            if (ChangeHotkey is null) throw new InvalidOperationException(LocalizationService.T("请从启动器打开管理窗口后设置快捷键。"));
             ChangeHotkey(HotkeyInput.Text);
             HotkeyInput.Text = _config.Hotkey;
-            ThemeStatus.Text = "呼出快捷键已保存：" + _config.Hotkey;
+            ThemeStatus.Text = LocalizationService.T("呼出快捷键已保存：") + _config.Hotkey;
         }
         catch (Exception ex) { ThemeStatus.Text = ex.Message; }
     }
 
     private void Usage_Click(object sender, RoutedEventArgs e) => System.Windows.MessageBox.Show(this,
-        "鼠标滚轮：切换选中的图标\n右键点击任意图标：直接打开对应程序\n左键点击图标：选中；再次点击选中图标：打开\n点击空白处：隐藏启动器，返回桌面\n\n方向键：切换图标\nEnter：打开选中的应用\nEsc：隐藏启动器\n呼出 / 隐藏快捷键：" + _config.Hotkey +
-        "\n可在外观与配色旁输入新组合键并点击“应用快捷键”。\n\n管理窗口：Ctrl+S 保存，Esc 关闭\n拖入快捷方式或 EXE：新建应用并读取原图标\n拖入图片：更换当前编辑条目的图片\n\n洁净版仅隐藏主界面装饰和提示，操作方式不变。",
-        "使用说明", MessageBoxButton.OK, MessageBoxImage.Information);
+        LocalizationService.T("鼠标滚轮：切换选中的图标\n右键点击任意图标：直接打开对应程序\n左键点击图标：选中；再次点击选中图标：打开\n点击空白处：隐藏启动器，返回桌面\n\n方向键：切换图标\nEnter：打开选中的应用\nEsc：隐藏启动器\n呼出 / 隐藏快捷键：") + _config.Hotkey +
+        LocalizationService.T("\n可在外观与配色旁输入新组合键并点击“应用快捷键”。\n\n管理窗口：Ctrl+S 保存，Esc 关闭\n拖入快捷方式或 EXE：新建应用并读取原图标\n拖入图片：更换当前编辑条目的图片\n\n洁净版仅隐藏主界面装饰和提示，操作方式不变。"),
+        LocalizationService.T("使用说明"), MessageBoxButton.OK, MessageBoxImage.Information);
 
     private static bool IsImage(string path) => new[] { ".png", ".jpg", ".jpeg", ".bmp", ".ico" }.Contains(Path.GetExtension(path).ToLowerInvariant());
     private static bool CanImport(string path) => IsImage(path) || new[] { ".lnk", ".url", ".exe" }.Contains(Path.GetExtension(path).ToLowerInvariant());
@@ -336,7 +376,7 @@ public partial class AppManagerWindow : Window
         e.Handled = true;
         if (HandleSortDrag(e, true)) return;
         if (e.Data.GetData(System.Windows.DataFormats.FileDrop) is not string[] paths || paths.Length != 1 || !CanImport(paths[0]))
-        { ShowStatus("每次请拖入一个快捷方式、EXE 或图片。", false); return; }
+        { ShowStatus(LocalizationService.T("每次请拖入一个快捷方式、EXE 或图片。"), false); return; }
         ImportFile(paths[0], true);
     }
     private void ImportFile(string path, bool createNew)
@@ -349,7 +389,7 @@ public partial class AppManagerWindow : Window
                 _pendingImage = path;
                 _pendingIcon = null;
                 _dirty = true;
-                ShowStatus("图片已替换，点击保存后生效。", true);
+                ShowStatus(LocalizationService.T("图片已替换，点击保存后生效。"), true);
                 return;
             }
             TargetService.Validate(path);
@@ -371,9 +411,9 @@ public partial class AppManagerWindow : Window
                 AvatarPreview.Source = _pendingIcon;
                 AvatarPlaceholder.Visibility = Visibility.Collapsed;
             }
-            ShowStatus("已填入目标地址，确认后点击保存。快捷方式按原有设置启动；已有自定义图片会保留。", true);
+            ShowStatus(LocalizationService.T("已填入目标地址，确认后点击保存。快捷方式按原有设置启动；已有自定义图片会保留。"), true);
         }
-        catch (Exception ex) { ShowStatus("导入失败：" + ex.Message, false); }
+        catch (Exception ex) { ShowStatus(LocalizationService.T("导入失败：") + ex.Message, false); }
     }
 
     private void Close_Click(object sender, RoutedEventArgs e) => Close();

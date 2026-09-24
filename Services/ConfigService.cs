@@ -21,9 +21,9 @@ public static class ConfigService
         var path = File.Exists(ConfigPath) ? ConfigPath : Path.Combine(AppContext.BaseDirectory, "apps.json");
         if (!File.Exists(path)) return new LauncherConfig();
         var config = JsonSerializer.Deserialize<LauncherConfig>(File.ReadAllText(path), JsonOptions)
-            ?? throw new InvalidDataException("应用配置为空，请检查：" + path);
+            ?? throw new InvalidDataException(LocalizationService.T("应用配置为空，请检查：") + path);
         if (config.Apps is null || config.Apps.Any(app => app is null))
-            throw new InvalidDataException("应用列表格式不正确，请检查：" + path);
+            throw new InvalidDataException(LocalizationService.T("应用列表格式不正确，请检查：") + path);
         foreach (var app in config.Apps)
         {
             app.Avatar = ResolvePath(app.Avatar);

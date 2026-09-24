@@ -1,7 +1,7 @@
 <Window x:Class="CharacterLauncher.AppManagerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Z-Orbit · 应用管理" Icon="/Z-Orbit;component/assets/app-icon.ico" Width="1040" Height="800" MinWidth="800" MinHeight="620"
+        Title="{DynamicResource L001}" Icon="/Z-Orbit;component/assets/app-icon.ico" Width="1040" Height="800" MinWidth="800" MinHeight="620"
         WindowStyle="None" WindowStartupLocation="CenterOwner" Background="{DynamicResource AppBackground}" Foreground="{DynamicResource Text}"
         FontFamily="Microsoft YaHei UI" FontSize="14" ShowInTaskbar="False"
         AllowDrop="True" PreviewDragOver="Window_DragOver" PreviewDrop="Window_Drop" PreviewKeyDown="Window_PreviewKeyDown" Closing="Window_Closing">
@@ -12,51 +12,55 @@
         <Grid Margin="0,0,0,18" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Z-Orbit;component/assets/app-icon-rounded20.png" Width="40" Height="40" Margin="0,0,14,0" />
-                <StackPanel><TextBlock Text="应用管理" FontSize="25" FontWeight="SemiBold" />
-                    <TextBlock Text="管理你的应用与快捷入口" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,5,0,0" /></StackPanel>
+                <StackPanel><TextBlock Text="{DynamicResource L002}" FontSize="25" FontWeight="SemiBold" />
+                    <TextBlock Text="{DynamicResource L003}" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,5,0,0" /></StackPanel>
             </StackPanel>
-            <Button Content="×" Click="Close_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Padding="0" FontSize="22" AutomationProperties.Name="关闭应用管理" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,56,0">
+                <RadioButton x:Name="LanguageChinese" Content="简体中文" Tag="zh-CN" GroupName="Language" Checked="Language_Checked" AutomationProperties.Name="简体中文" />
+                <RadioButton x:Name="LanguageEnglish" Content="English" Tag="en-US" GroupName="Language" Checked="Language_Checked" AutomationProperties.Name="English" />
+            </StackPanel>
+            <Button Content="×" Click="Close_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Padding="0" FontSize="22" AutomationProperties.Name="{DynamicResource L004}" />
         </Grid>
         <Border Grid.Row="1" Background="{DynamicResource Panel}" CornerRadius="10" Padding="14" Margin="0,0,0,20">
             <StackPanel>
                 <WrapPanel VerticalAlignment="Center">
-                    <CheckBox x:Name="CleanModeToggle" Content="洁净版模式" Click="CleanMode_Click" Margin="0,0,18,0" ToolTip="隐藏主界面的标识、关闭按钮和底部提示，保留应用管理入口" /><TextBlock Text="外观与配色" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,18,0" />
-                    <RadioButton x:Name="ThemeTerracotta" GroupName="Theme" Tag="terracotta" Checked="Theme_Checked" AutomationProperties.Name="深色陶土">
-                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#D59A74" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="深色陶土" /></StackPanel>
+                    <CheckBox x:Name="CleanModeToggle" Content="{DynamicResource L005}" Click="CleanMode_Click" Margin="0,0,18,0" ToolTip="{DynamicResource L006}" /><TextBlock Text="{DynamicResource L007}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,18,0" />
+                    <RadioButton x:Name="ThemeTerracotta" GroupName="Theme" Tag="terracotta" Checked="Theme_Checked" AutomationProperties.Name="{DynamicResource L008}">
+                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#D59A74" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="{DynamicResource L008}" /></StackPanel>
                     </RadioButton>
-                    <RadioButton x:Name="ThemeIce" GroupName="Theme" Tag="ice" Checked="Theme_Checked" AutomationProperties.Name="深色冰蓝">
-                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#89C7EA" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="深色冰蓝" /></StackPanel>
+                    <RadioButton x:Name="ThemeIce" GroupName="Theme" Tag="ice" Checked="Theme_Checked" AutomationProperties.Name="{DynamicResource L009}">
+                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#89C7EA" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="{DynamicResource L009}" /></StackPanel>
                     </RadioButton>
-                    <RadioButton x:Name="ThemeViolet" GroupName="Theme" Tag="violet" Checked="Theme_Checked" AutomationProperties.Name="深色紫罗兰">
-                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#BCABF1" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="深色紫罗兰" /></StackPanel>
+                    <RadioButton x:Name="ThemeViolet" GroupName="Theme" Tag="violet" Checked="Theme_Checked" AutomationProperties.Name="{DynamicResource L010}">
+                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#BCABF1" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="{DynamicResource L010}" /></StackPanel>
                     </RadioButton>
-                    <RadioButton x:Name="ThemeCream" GroupName="Theme" Tag="cream" Checked="Theme_Checked" AutomationProperties.Name="浅色奶油">
-                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#D3BBA0" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="浅色奶油" /></StackPanel>
+                    <RadioButton x:Name="ThemeCream" GroupName="Theme" Tag="cream" Checked="Theme_Checked" AutomationProperties.Name="{DynamicResource L011}">
+                        <StackPanel Orientation="Horizontal"><Ellipse Fill="#D3BBA0" Width="12" Height="12" Margin="0,0,8,0" /><TextBlock Text="{DynamicResource L011}" /></StackPanel>
                     </RadioButton>
                 </WrapPanel>
                 <WrapPanel Margin="0,10,0,0">
-    <TextBlock Text="呼出快捷键" VerticalAlignment="Center" Margin="0,0,12,0" />
-    <TextBox x:Name="HotkeyInput" Width="170" AutomationProperties.Name="呼出快捷键" ToolTip="例如 Alt+Space 或 Ctrl+Alt+L" />
-    <Button Content="应用快捷键" Click="ApplyHotkey_Click" Margin="8,0,0,0" />
-    <Button Content="使用说明" Click="Usage_Click" Margin="8,0,0,0" />
+    <TextBlock Text="{DynamicResource L012}" VerticalAlignment="Center" Margin="0,0,12,0" />
+    <TextBox x:Name="HotkeyInput" Width="170" AutomationProperties.Name="{DynamicResource L012}" ToolTip="{DynamicResource L013}" />
+    <Button Content="{DynamicResource L014}" Click="ApplyHotkey_Click" Margin="8,0,0,0" />
+    <Button Content="{DynamicResource L015}" Click="Usage_Click" Margin="8,0,0,0" />
 </WrapPanel>
-<TextBlock x:Name="ThemeStatus" Text="点击即切换，自动保存。" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,9,0,0" AutomationProperties.LiveSetting="Polite" />
+<TextBlock x:Name="ThemeStatus" Text="{DynamicResource L016}" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,9,0,0" AutomationProperties.LiveSetting="Polite" />
             </StackPanel>
         </Border>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions><ColumnDefinition Width="220" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
             <DockPanel>
                 <StackPanel DockPanel.Dock="Bottom" Margin="0,16,0,0">
-                    <CheckBox x:Name="StartupToggle" Content="开机自动启动" Click="StartupToggle_Click" MinHeight="40" AutomationProperties.Name="开机自动启动" />
-                    <TextBlock x:Name="StartupStatus" Text="更改立即保存，登录后在托盘运行。" FontSize="12" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" />
+                    <CheckBox x:Name="StartupToggle" Content="{DynamicResource L017}" Click="StartupToggle_Click" MinHeight="40" AutomationProperties.Name="{DynamicResource L017}" />
+                    <TextBlock x:Name="StartupStatus" Text="{DynamicResource L018}" FontSize="12" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" />
                 </StackPanel>
-                <Button x:Name="DeleteButton" DockPanel.Dock="Bottom" Content="删除选中应用" Click="Delete_Click" Foreground="{DynamicResource Danger}" Margin="0,12,0,0" />
+                <Button x:Name="DeleteButton" DockPanel.Dock="Bottom" Content="{DynamicResource L019}" Click="Delete_Click" Foreground="{DynamicResource Danger}" Margin="0,12,0,0" />
                 <Grid DockPanel.Dock="Top" Margin="0,0,0,12">
                     <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition /></Grid.ColumnDefinitions>
-                    <Button x:Name="AddButton" Content="＋ 添加应用" Click="Add_Click" Padding="6,6" Margin="0,0,4,0" Style="{DynamicResource PrimaryButton}" />
-                    <Button x:Name="SortButton" Grid.Column="1" Content="应用排序" Click="Sort_Click" Padding="6,6" Margin="4,0,0,0" ToolTip="进入排序模式，拖动头像调整顺序" />
+                    <Button x:Name="AddButton" Content="{DynamicResource L020}" Click="Add_Click" Padding="6,6" Margin="0,0,4,0" Style="{DynamicResource PrimaryButton}" />
+                    <Button x:Name="SortButton" Grid.Column="1" Content="{DynamicResource L021}" Click="Sort_Click" Padding="6,6" Margin="4,0,0,0" ToolTip="{DynamicResource L022}" />
                 </Grid>
-                <ListBox x:Name="AppList" SelectionChanged="AppList_SelectionChanged" PreviewMouseLeftButtonDown="AppList_PreviewMouseLeftButtonDown" PreviewMouseMove="AppList_PreviewMouseMove" AutomationProperties.Name="已有应用" ScrollViewer.HorizontalScrollBarVisibility="Disabled">                    <ListBox.ItemTemplate><DataTemplate>
+                <ListBox x:Name="AppList" SelectionChanged="AppList_SelectionChanged" PreviewMouseLeftButtonDown="AppList_PreviewMouseLeftButtonDown" PreviewMouseMove="AppList_PreviewMouseMove" AutomationProperties.Name="{DynamicResource L023}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">                    <ListBox.ItemTemplate><DataTemplate>
                         <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="44" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
                             <Border Width="36" Height="36" Background="{DynamicResource Input}" CornerRadius="6">
                                 <Image Source="{Binding Avatar}" Stretch="UniformToFill" />
@@ -69,26 +73,26 @@
             <Border Grid.Column="2" Background="{DynamicResource Panel}" CornerRadius="12" Padding="22">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
-                        <Border BorderBrush="{DynamicResource Accent}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12"><TextBlock Text="拖入一个快捷方式或 EXE，自动添加名称、地址与原图标。&#x0a;拖入图片可更换当前头像；确认后点击保存。" TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource Muted}" /></Border><TextBlock x:Name="EditorTitle" Text="编辑应用" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,12" />
+                        <Border BorderBrush="{DynamicResource Accent}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12"><TextBlock Text="{DynamicResource L024}" TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource Muted}" /></Border><TextBlock x:Name="EditorTitle" Text="{DynamicResource L025}" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,12" />
                         <Grid Margin="0,0,0,16">
                             <Grid.ColumnDefinitions><ColumnDefinition Width="120" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
                             <Border Width="96" Height="96" Background="{DynamicResource Input}" CornerRadius="10" HorizontalAlignment="Left" ClipToBounds="True">
-                                <Grid><TextBlock x:Name="AvatarPlaceholder" Text="应用头像" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Muted}" />
-                                    <Image x:Name="AvatarPreview" Stretch="UniformToFill" AutomationProperties.Name="头像预览" /></Grid>
+                                <Grid><TextBlock x:Name="AvatarPlaceholder" Text="{DynamicResource L026}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Muted}" />
+                                    <Image x:Name="AvatarPreview" Stretch="UniformToFill" AutomationProperties.Name="{DynamicResource L027}" /></Grid>
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <Button Content="更换图片…" Click="ChooseImage_Click" HorizontalAlignment="Left" />
-                                <TextBlock Text="PNG、JPG、BMP 或 ICO，最大 20 MB。&#x0a;保存后自动保留图片副本。" Foreground="{DynamicResource Muted}" FontSize="12" TextWrapping="Wrap" Margin="0,8,0,0" />
+                                <Button Content="{DynamicResource L028}" Click="ChooseImage_Click" HorizontalAlignment="Left" />
+                                <TextBlock Text="{DynamicResource L029}" Foreground="{DynamicResource Muted}" FontSize="12" TextWrapping="Wrap" Margin="0,8,0,0" />
                             </StackPanel>
                         </Grid>
-                        <Label Content="应用名称" Target="{Binding ElementName=NameInput}" />
-                        <TextBox x:Name="NameInput" MaxLength="80" TextChanged="Input_Changed" AutomationProperties.Name="应用名称" />
-                        <Label Content="目标地址" Target="{Binding ElementName=TargetInput}" Margin="0,12,0,0" />
-                        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox x:Name="TargetInput" TextChanged="Input_Changed" AutomationProperties.Name="本地目标或网页地址" /><Button Grid.Column="1" Content="文件…" Click="ChooseFile_Click" Margin="8,0,0,0" Padding="10,6" ToolTip="选择程序、快捷方式或文件" /><Button Grid.Column="2" Content="文件夹…" Click="ChooseFolder_Click" Margin="8,0,0,0" Padding="10,6" /></Grid>
-                        <TextBlock Text="本地程序、快捷方式、文件夹，或 https:// 开头的网址。" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,7,0,10" />
+                        <Label Content="{DynamicResource L030}" Target="{Binding ElementName=NameInput}" />
+                        <TextBox x:Name="NameInput" MaxLength="80" TextChanged="Input_Changed" AutomationProperties.Name="{DynamicResource L030}" />
+                        <Label Content="{DynamicResource L031}" Target="{Binding ElementName=TargetInput}" Margin="0,12,0,0" />
+                        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox x:Name="TargetInput" TextChanged="Input_Changed" AutomationProperties.Name="{DynamicResource L032}" /><Button Grid.Column="1" Content="{DynamicResource L033}" Click="ChooseFile_Click" Margin="8,0,0,0" Padding="10,6" ToolTip="{DynamicResource L035}" /><Button Grid.Column="2" Content="{DynamicResource L034}" Click="ChooseFolder_Click" Margin="8,0,0,0" Padding="10,6" /></Grid>
+                        <TextBlock Text="{DynamicResource L036}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="12" Margin="0,7,0,10" />
 
-                        <Label Content="启动参数（选填）" Target="{Binding ElementName=ArgumentsInput}" Margin="0,10,0,0" />
-                        <TextBox x:Name="ArgumentsInput" TextChanged="Input_Changed" AutomationProperties.Name="启动参数（选填）" />
+                        <Label Content="{DynamicResource L037}" Target="{Binding ElementName=ArgumentsInput}" Margin="0,10,0,0" />
+                        <TextBox x:Name="ArgumentsInput" TextChanged="Input_Changed" AutomationProperties.Name="{DynamicResource L037}" />
                     </StackPanel>
                 </ScrollViewer>
             </Border>
@@ -96,10 +100,10 @@
         <Grid Grid.Row="3" Margin="0,12,0,0">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
             <TextBlock x:Name="StatusText" TextWrapping="Wrap" Foreground="{DynamicResource Danger}" Margin="0,0,0,10" AutomationProperties.LiveSetting="Polite" />
-            <TextBlock Grid.Row="1" Text="保存后立即更新轮播" VerticalAlignment="Center" Foreground="{DynamicResource Muted}" FontSize="12" />
+            <TextBlock Grid.Row="1" Text="{DynamicResource L038}" VerticalAlignment="Center" Foreground="{DynamicResource Muted}" FontSize="12" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="测试打开" Click="TestOpen_Click" Margin="0,0,8,0" /><Button Content="关闭" Click="Close_Click" Margin="0,0,8,0" />
-                <Button x:Name="SaveButton" Content="保存更改" Click="Save_Click" Style="{DynamicResource PrimaryButton}" MinWidth="120" />
+                <Button Content="{DynamicResource L039}" Click="TestOpen_Click" Margin="0,0,8,0" /><Button Content="{DynamicResource L040}" Click="Close_Click" Margin="0,0,8,0" />
+                <Button x:Name="SaveButton" Content="{DynamicResource L041}" Click="Save_Click" Style="{DynamicResource PrimaryButton}" MinWidth="120" />
             </StackPanel>
         </Grid>
     </Grid>

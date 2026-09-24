@@ -35,9 +35,9 @@ public partial class AppManagerWindow
     private void Sort_Click(object sender, RoutedEventArgs e)
     {
         _sorting = !_sorting;
-        SortButton.Content = _sorting ? "完成排序" : "应用排序";
+        SortButton.Content = _sorting ? LocalizationService.T("完成排序") : LocalizationService.T("应用排序");
         AppList.Cursor = _sorting ? System.Windows.Input.Cursors.SizeAll : null;
-        ShowStatus(_sorting ? "拖动头像到目标位置，松开自动保存；拖到列表上下边缘可滚动。" : "已退出排序模式。", true);
+        ShowStatus(_sorting ? LocalizationService.T("拖动头像到目标位置，松开自动保存；拖到列表上下边缘可滚动。") : LocalizationService.T("已退出排序模式。"), true);
     }
 
     private void AppList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -144,7 +144,7 @@ public partial class AppManagerWindow
             draft.Apps.Insert(to, moved);
             ConfigService.Save(draft);
         }
-        catch (Exception ex) { ShowStatus("顺序保存失败，原顺序未改变：" + ex.Message, false); return; }
+        catch (Exception ex) { ShowStatus(LocalizationService.T("顺序保存失败，原顺序未改变：") + ex.Message, false); return; }
         var editing = _editingIndex >= 0 ? _config.Apps[_editingIndex] : null;
         _loading = true;
         try
@@ -159,7 +159,7 @@ public partial class AppManagerWindow
         }
         finally { _loading = false; }
         Saved?.Invoke(_editingIndex);
-        ShowStatus(_dirty ? "顺序已保存。当前名称、地址或图片的修改仍需点击保存。" : "顺序已保存，可继续拖动，或点击“完成排序”。", true);
+        ShowStatus(_dirty ? LocalizationService.T("顺序已保存。当前名称、地址或图片的修改仍需点击保存。") : LocalizationService.T("顺序已保存，可继续拖动，或点击“完成排序”。"), true);
     }
 
     private sealed class SortInsertionAdorner(UIElement element) : Adorner(element)

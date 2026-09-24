@@ -13,7 +13,7 @@
             <TextBlock Text="Z-Orbit" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,0,0,0" />
         </StackPanel>
         <Button x:Name="HideButton" Content="×" Click="Hide_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,24,32,0"
-                Width="42" FontSize="22" Padding="0" ToolTip="隐藏启动器（Esc）" AutomationProperties.Name="隐藏启动器" />
+                Width="42" FontSize="22" Padding="0" ToolTip="{DynamicResource L042}" AutomationProperties.Name="{DynamicResource L043}" />
         <Viewbox Stretch="Uniform" StretchDirection="DownOnly" Margin="28,92,28,108">
             <Grid Width="1160" Height="460">
                 <Grid.RowDefinitions><RowDefinition Height="360" /><RowDefinition Height="100" /></Grid.RowDefinitions>
@@ -28,10 +28,10 @@
                 </TextBlock>
             </Grid>
         </Viewbox>
-        <TextBlock x:Name="UsageHint" TextWrapping="Wrap" MaxWidth="780" Text="← → 切换    Enter 打开    Esc 隐藏" Foreground="{DynamicResource Muted}" FontSize="13"
+        <TextBlock x:Name="UsageHint" TextWrapping="Wrap" MaxWidth="780" Text="{DynamicResource L044}" Foreground="{DynamicResource Muted}" FontSize="13"
                    HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="36,0,0,42" />
-        <Button x:Name="ManageAppsButton" Content="应用管理" Click="ManageApps_Click" HorizontalAlignment="Right"
+        <Button x:Name="ManageAppsButton" Content="{DynamicResource L002}" Click="ManageApps_Click" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" Margin="0,0,36,28" MinWidth="144" Height="48" FontSize="15"
-                BorderBrush="{DynamicResource Accent}" AutomationProperties.Name="打开应用管理窗口" />
+                BorderBrush="{DynamicResource Accent}" AutomationProperties.Name="{DynamicResource L045}" />
     </Grid>
 </Window>

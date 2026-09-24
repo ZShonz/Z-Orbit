@@ -30,6 +30,7 @@ public partial class LauncherWindow : Window
     public LauncherWindow()
     {
         _config = ConfigService.Load();
+        LocalizationService.Apply(_config.Language);
         ThemeService.Apply(_config.Theme);
         InitializeComponent();
         _apps = _config.Apps;
@@ -37,8 +38,8 @@ public partial class LauncherWindow : Window
         try { StartupService.Apply(_config.StartWithWindows); }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show("启动器仍可使用，但开机启动设置未生效：\n" + ex.Message,
-                "开机启动设置", MessageBoxButton.OK, MessageBoxImage.Warning);
+            System.Windows.MessageBox.Show(LocalizationService.T("启动器仍可使用，但开机启动设置未生效：\n") + ex.Message,
+                LocalizationService.T("开机启动设置"), MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         Loaded += (_, _) => RenderCarousel(animate: false);
         Closing += (_, _) => _hotkey.Dispose();
@@ -56,9 +57,9 @@ public partial class LauncherWindow : Window
 
         if (!hotkeyRegistered)
         {
-            _tray!.Text = "Z-Orbit — 快捷键被占用";
+            _tray!.Text = LocalizationService.T("Z-Orbit — 快捷键被占用");
             if (!startHidden) System.Windows.MessageBox.Show(
-                $"启动器已经打开，但 {_config.Hotkey} 被其他程序或 Windows 占用。\n\n你仍可通过托盘图标打开启动器。",
+                LocalizationService.F("启动器已经打开，但 {0} 被其他程序或 Windows 占用。\n\n你仍可通过托盘图标打开启动器。", _config.Hotkey),
                 "Z-Orbit",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
@@ -72,8 +73,8 @@ public partial class LauncherWindow : Window
         using (var icon = new System.Drawing.Icon(stream))
             _trayIcon = (System.Drawing.Icon)icon.Clone();
         var menu = new Forms.ContextMenuStrip();
-        menu.Items.Add("显示启动器", null, (_, _) => Dispatcher.Invoke(ShowLauncher));
-        menu.Items.Add("退出", null, (_, _) => Dispatcher.Invoke(ExitApplication));
+        menu.Items.Add(LocalizationService.T("显示启动器"), null, (_, _) => Dispatcher.Invoke(ShowLauncher));
+        menu.Items.Add(LocalizationService.T("退出"), null, (_, _) => Dispatcher.Invoke(ExitApplication));
         _tray = new Forms.NotifyIcon
         {
             Text = "Z-Orbit — " + _config.Hotkey,
@@ -139,7 +140,7 @@ public partial class LauncherWindow : Window
                 card.Background = System.Windows.Media.Brushes.Transparent;
                 card.Child = null;
             }
-            SelectedName.Text = "点击右下角“应用管理”添加应用";
+            SelectedName.Text = LocalizationService.T("点击右下角“应用管理”添加应用");
             return;
         }
 
@@ -250,7 +251,7 @@ public partial class LauncherWindow : Window
         border.ToolTip = app.Name;
         if (offset == 0) border.SetResourceReference(Border.BorderBrushProperty, "Accent");
         else border.BorderBrush = System.Windows.Media.Brushes.Transparent;
-        System.Windows.Automation.AutomationProperties.SetName(border, $"启动 {app.Name}");
+        System.Windows.Automation.AutomationProperties.SetName(border, LocalizationService.F("启动 {0}", app.Name));
 
         var avatarPath = ResolveAvatar(app.Avatar);
         if (!string.IsNullOrWhiteSpace(avatarPath) && File.Exists(avatarPath))
@@ -283,8 +284,18 @@ public partial class LauncherWindow : Window
 
     private void ApplyAppearance()
     {
+        if (_tray?.ContextMenuStrip is { } menu)
+        {
+            menu.Items[0].Text = LocalizationService.T("显示启动器");
+            menu.Items[1].Text = LocalizationService.T("退出");
+            _tray.Text = _hotkey.IsRegistered ? "Z-Orbit — " + _config.Hotkey : LocalizationService.T("Z-Orbit — 快捷键被占用");
+        }
+        if (_apps.Count == 0) SelectedName.Text = LocalizationService.T("点击右下角“应用管理”添加应用");
+        foreach (var card in _slotCards.Values)
+            if (card.Tag is int index && index >= 0 && index < _apps.Count)
+                System.Windows.Automation.AutomationProperties.SetName(card, LocalizationService.F("启动 {0}", _apps[index].Name));
         BrandHeader.Visibility = HideButton.Visibility = UsageHint.Visibility = _config.CleanMode ? Visibility.Collapsed : Visibility.Visible;
-        UsageHint.Text = $"鼠标滚轮 / ← →：切换    右键图标 / Enter：打开    左键：选中，再次点击打开\n点击空白处 / Esc：隐藏并返回桌面    呼出快捷键：{_config.Hotkey}";
+        UsageHint.Text = LocalizationService.F("鼠标滚轮 / ← →：切换    右键图标 / Enter：打开    左键：选中，再次点击打开\n点击空白处 / Esc：隐藏并返回桌面    呼出快捷键：{0}", _config.Hotkey);
     }
 
     private void ChangeHotkey(string text)
@@ -295,7 +306,7 @@ public partial class LauncherWindow : Window
         try
         {
             if (!candidate.Register(new WindowInteropHelper(this).Handle, normalized))
-                throw new InvalidOperationException("这个快捷键已被占用，请换一个组合；原快捷键仍然有效。");
+                throw new InvalidOperationException(LocalizationService.T("这个快捷键已被占用，请换一个组合；原快捷键仍然有效。"));
             var draft = ConfigService.Clone(_config);
             draft.Hotkey = normalized;
             ConfigService.Save(draft);
@@ -363,7 +374,7 @@ public partial class LauncherWindow : Window
         {
             var target = ResolveTarget(app.Target);
             if (!LooksLikeUri(target) && !File.Exists(target) && !Directory.Exists(target))
-                throw new FileNotFoundException("应用快捷方式或程序不存在。", target);
+                throw new FileNotFoundException(LocalizationService.T("应用快捷方式或程序不存在。"), target);
             Process.Start(new ProcessStartInfo
             {
                 FileName = target,
@@ -374,7 +385,7 @@ public partial class LauncherWindow : Window
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"无法启动 {app.Name}\n\n{ex.Message}", "Z-Orbit",
+            System.Windows.MessageBox.Show(LocalizationService.F("无法启动 {0}\n\n{1}", app.Name, ex.Message), "Z-Orbit",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
